@@ -1,7 +1,7 @@
 # accounts.views.py
 
 # Here, we are adding all of the necessary imports for our LoginView
-import django_filters.rest_framework
+# import django_filters.rest_framework
 from django.shortcuts import render, redirect
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
@@ -70,5 +70,5 @@ class RegisterUsersView(generics.CreateAPIView):
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields =['username','email']
+    # filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    # filterset_fields =['username','email']
