@@ -45,7 +45,7 @@ Return Values:
 
 # 🍿 Tweets
 
-## <strong>GET</strong> {URL}/tweets
+## <strong>GET</strong> {URL}/tweets/
 
 - View all tweets by all users
 
@@ -83,6 +83,7 @@ Return Values:
 <br>
 
 ## <strong>GET</strong> {URL}/tweets/{:tweetid}
+
 - Get one tweet by ID
 
 <br>
@@ -93,10 +94,10 @@ Return Values:
 
 ```json
 {
-"id": 3,
-"author": 1,
-"message": "hello world",
-"date": "2021-08-12T08:35:54.539501Z"
+  "id": 3,
+  "author": 1,
+  "message": "hello world",
+  "date": "2021-08-12T08:35:54.539501Z"
 }
 ```
 
@@ -104,76 +105,115 @@ Return Values:
 
 <br>
 
+## <strong>POST</strong> {URL}/tweets/
+
+- Post a new tweet
+
+| field   | data_type | required | unique |     |
+| ------- | --------- | -------- | ------ | --- |
+| author  | user_id   | true     | true   |
+| message | String    | true     | -      |
+| date    | String    | true     | true   |
 
 ## <strong>DELETE</strong> {URL}/tweets/{:tweet_id}
+
 - Delete a tweet
 
+<br>
 
+# 🍉 Direct Messages
 
-## <strong>POST</strong> {URL}/tweets
+## <strong>GET</strong> {URL}/messages/{:userid}/{:friendid}
 
-Tweets Post 1
-URL: /tweets
-Method: POST
-Body: {
-message: String
-}
-Description: Post a tweet
-Return Values:
+- Get conversation between you and your friend
 
-DIRECT MESSAGES
-DMs - Get conversation between you and your friend
-URL: /messages/:userid/:friendid
-Method: GET
-Description: Retrieve all messages between you and your friend
-Return Values:
+<details>
 
-DMs - Send a message to your friend
-URL: /messages
-Method: POST
-Body: {
-sender: :id
-recipient: :id
-}
-Description: Send a message to your friend
-Return Values:
+<summary>Example</summary>
 
-TREASURES
-Treasure view all
-URL: /treasures
-Method: GET
-Description: View all the treasures existing in the app
-Return Values: Array of Objects, Fields: author,name, description, longitude, latitude, date, hunters(array)
+```json
+[
+  {
+    "model": "direct_message.direct",
+    "pk": 1,
+    "fields": {
+      "sender": 1,
+      "recipient": 2,
+      "dm": "hello"
+    }
+  }
+]
+```
 
-Treasure Create new
-URL: /treasures
-Method: POST
-Body: {
-"author": user_id,
-"name": treasure_name,
-"description": treasure_description,
-"longitude": Integer,
-"latitude": Integer,
-"date": date,
-"hunters": "",
-}
-Description: User creates a new treasure for a hunt so there are no hunters to add yet, will explore images
-in the future
-Return Values: Treasure object
+</details>
 
-Treasure view one
-URL: /treasure/<:treasure_name>
-Method: GET
-Description: Find a treasure by its name
-Return Values: Treasure Object
+<br>
 
-Treasure add hunter
-URL: /treasure/<:treasure_name>
-Method: PUT
-Body:{
-"author": author_id,
-"name": treasure_name,
-"hunter": hunter_id,
-}
-Description: Add the user as a hunter to a existing treasure
-Return Value: Treasure Object
+## <strong>POST</strong> {URL}/messages/
+
+- Send a message to your friend
+
+| field     | data_type    | required | unique |     |
+| --------- | ------------ | -------- | ------ | --- |
+| sender    | sender_id    | true     | true   |
+| recipient | recipient_id | true     | true   |
+| dm        | String       | true     | true   |
+
+<br>
+
+# 🍺 Treasures
+
+## <strong>GET</strong> {URL}/treasures/
+
+- View all the treasures
+
+<details>
+
+<summary>Example</summary>
+
+```json
+[
+  {
+    "author": 1,
+    "name": "BIGGEST TREASURE OF ALL",
+    "description": "gold bars, rolex, bentley",
+    "longitude": "1.356070000000000",
+    "latitude": "103.954230000000000",
+    "date": "2021-08-16T13:51:52.318530Z",
+    "hunters": [2]
+  }
+]
+```
+
+</details>
+
+<br>
+
+## <strong>GET</strong> {URL}/treasures/{:treasure_name}
+
+- Get one treasure via name
+
+## <strong>POST</strong> {URL}/treasures/
+
+- Post a new treasure
+
+| field       | data_type | required | unique |     |
+| ----------- | --------- | -------- | ------ | --- |
+| author      | admin_id  | -        | -      |
+| name        | String    | -        | -      |     |
+| description | String    | true     | -      |
+| longitude   | Integer   | true     | -      |
+| latitude    | Integer   | true     | -      |     |
+| date        | String    | true     | -      |
+| hunters     | Array     | false    | -      |     |
+
+## <strong>PUT</strong> {URL}/treasures/{:treasure_name}
+
+- Add hunters to the treasure object
+
+| field  | data_type     | required | unique |     |
+| ------ | ------------- | -------- | ------ | --- |
+| author | user_id       | true     | true   |
+| name   | treasure_name | true     | -      |
+| hunter | hunter_id     | true     | true   |
+
