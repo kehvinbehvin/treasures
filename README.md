@@ -30,6 +30,20 @@ Return Values:
    1. Because of duplicate username/email --> (Status = 500 Internal Server Error), Exception Value = Duplicate Key Value
    2. Because of empty fields --> (error message: "username, password and email is required to register a user")
 
+TOKEN REFRESH
+URL: /tweets
+Method: POST
+Header: {
+Authorization: Bearer <jwt access token>
+}
+Body: {
+refresh: <jwt refresh token>
+}
+Description: View all tweets by all users
+Return Values: {
+"access": <jwt access token>
+}
+
 TWEETS
 
 Tweets View All
@@ -78,3 +92,43 @@ recipient: :id
 }
 Description: Send a message to your friend
 Return Values:
+
+TREASURES
+Treasure view all
+URL: /treasures
+Method: GET
+Description: View all the treasures existing in the app
+Return Values: Array of Objects, Fields: author,name, description, longitude, latitude, date, hunters(array)
+
+Treasure Create new
+URL: /treasures
+Method: POST
+Body: {
+"author": user_id,
+"name": treasure_name,
+"description": treasure_description,
+"longitude": Integer,
+"latitude": Integer,
+"date": date,
+"hunters": "",
+}
+Description: User creates a new treasure for a hunt so there are no hunters to add yet, will explore images
+in the future
+Return Values: Treasure object
+
+Treasure view one
+URL: /treasure/<:treasure_name>
+Method: GET
+Description: Find a treasure by its name
+Return Values: Treasure Object
+
+Treasure add hunter
+URL: /treasure/<:treasure_name>
+Method: PUT
+Body:{
+"author": author_id,
+"name": treasure_name,
+"hunter": hunter_id,
+}
+Description: Add the user as a hunter to a existing treasure
+Return Value: Treasure Object
