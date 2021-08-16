@@ -24,9 +24,12 @@ from rest_framework import routers
 from accounts.views import LoginView, RegisterUsersView, UserListView
 from direct_message.views import DmView, DmViewID
 from tweets.views import TweetsViewSet
-router = routers.DefaultRouter()
+from treasure.views import TreasuresView, TreasureView
 
+
+router = routers.DefaultRouter()
 router.register(r'tweets', TweetsViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('messages/', DmView.as_view()),
@@ -38,4 +41,6 @@ urlpatterns = [
     path('user/login/',LoginView.as_view(),name='user-login'),
     path('user/signup/', RegisterUsersView.as_view(),  name='user-signup'),
     path('user/viewall/', UserListView.as_view(), name='user-all'),
+    path('treasures/', TreasuresView.as_view(),name = 'all-treasures'),
+    path('treasure/<name>', TreasureView.as_view(),name = 'detailed-treasures'),
 ]

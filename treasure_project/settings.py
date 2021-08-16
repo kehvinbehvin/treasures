@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Apps
     'direct_message.apps.DirectMessageConfig',
     'tweets.apps.TweetsConfig',
+    'treasure.apps.TreasureConfig',
     # Third party
     'rest_framework',
     'corsheaders',
@@ -87,18 +88,18 @@ WSGI_APPLICATION = 'treasure_project.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'treasures',
-    # },
     'default': {
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'v3_database',
-        'USER': 'gerald',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'treasures',
+    },
+    # 'default': {
+    #     'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+    #     'NAME' : 'v3_database',
+    #     'USER': 'gerald',
+    #     'PASSWORD': '1234',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
 }
 
 
