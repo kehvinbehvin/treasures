@@ -19,12 +19,19 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from rest_framework import routers
 # Models
 from accounts.views import LoginView, RegisterUsersView, UserListView
+from direct_message.views import DmView, DmViewID
+from tweets.views import TweetsViewSet
+router = routers.DefaultRouter()
 
-
+router.register(r'tweets', TweetsViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('messages/', DmView.as_view()),
+    path('messages/<id>/<friend_id>', DmViewID.as_view()),
+    path('', include(router.urls)),
     path('api-auth/',include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/',TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
