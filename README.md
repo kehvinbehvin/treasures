@@ -5,15 +5,15 @@ USER LOGIN/REGISTRATION
 User Login
 URL: /user/login
 Method: POST
-Header: {
-Authorization: Bearer <jwt access token>
-}
 Body: {
 username: : String  
 password: : String
 }
 Description: Login User
 Return Values:
+
+1. If successful, will return 2 tokens, keys: access,refresh
+2. If unsuccessful, will return error status = 401 unauthorised
 
 User SignUp
 URL: /user/signup
@@ -25,11 +25,19 @@ password: : String
 Description: Sign Up User
 Return Values:
 
+1. If successful (Status = 201 Created)
+2. If unsuccesful
+   1. Because of duplicate username/email --> (Status = 500 Internal Server Error), Exception Value = Duplicate Key Value
+   2. Because of empty fields --> (error message: "username, password and email is required to register a user")
+
 TWEETS
 
 Tweets View All
 URL: /tweets
 Method: GET
+Header: {
+Authorization: Bearer <jwt access token>
+}
 Description: View all tweets by all users
 Return Values:
 
