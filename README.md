@@ -1,28 +1,41 @@
 API ENDPOINTS
 
-USER LOGIN/REGISTRATION
+# 👦🏻 User
 
-User Login
-URL: /user/login
-Method: POST
-Body: {
-username: : String  
-password: : String
-}
-Description: Login User
+## <strong>POST</strong> {URL}/user/login
+
+<br>
+
+## <strong>User Login</strong>
+
+| field    | data_type | required | unique |     |
+| -------- | --------- | -------- | ------ | --- |
+| username | String    | true     | true   |     |
+| password | String    | true     | -      |
+
+- Login User
+
 Return Values:
 
 1. If successful, will return 2 tokens, keys: access,refresh
 2. If unsuccessful, will return error status = 401 unauthorised
 
-User SignUp
-URL: /user/signup
-Method: POST
-Body: {
-username: : String
-password: : String
-}
-Description: Sign Up User
+## <strong>POST</strong> {URL}/user/signup
+
+<br>
+
+## <strong>User Creation</strong>
+
+| field    | data_type | required | unique |     |
+| -------- | --------- | -------- | ------ | --- |
+| username | String    | true     | true   |
+| password | String    | true     | -      |
+| email    | String    | true     | true   |
+
+<br>
+
+- Add new user
+
 Return Values:
 
 1. If successful (Status = 201 Created)
@@ -30,42 +43,74 @@ Return Values:
    1. Because of duplicate username/email --> (Status = 500 Internal Server Error), Exception Value = Duplicate Key Value
    2. Because of empty fields --> (error message: "username, password and email is required to register a user")
 
-TOKEN REFRESH
-URL: /tweets
-Method: POST
-Header: {
-Authorization: Bearer <jwt access token>
-}
-Body: {
-refresh: <jwt refresh token>
-}
-Description: View all tweets by all users
-Return Values: {
-"access": <jwt access token>
-}
+# 🍿 Tweets
 
-TWEETS
+## <strong>GET</strong> {URL}/tweets
 
-Tweets View All
-URL: /tweets
-Method: GET
-Header: {
-Authorization: Bearer <jwt access token>
+- View all tweets by all users
+
+<br>
+
+<details>
+
+<summary>Example</summary>
+
+```json
+[
+  {
+    "model": "direct_message.direct",
+    "pk": 1,
+    "fields": {
+      "sender": 1,
+      "recipient": 2,
+      "dm": "hello"
+    }
+  },
+  {
+    "model": "direct_message.direct",
+    "pk": 2,
+    "fields": {
+      "sender": 1,
+      "recipient": 3,
+      "dm": "hello"
+    }
+  }
+]
+```
+
+</details>
+
+<br>
+
+## <strong>GET</strong> {URL}/tweets/{:tweetid}
+- Get one tweet by ID
+
+<br>
+
+<details>
+
+<summary>Example</summary>
+
+```json
+{
+"id": 3,
+"author": 1,
+"message": "hello world",
+"date": "2021-08-12T08:35:54.539501Z"
 }
-Description: View all tweets by all users
-Return Values:
+```
 
-Tweets Delete 1
-URL: /tweets/:tweetid
-Method: DELETE
-Description: Delete one tweet
-Return Values:
+</details>
 
-Tweets Find 1
-URL: /tweets/:tweetid
-Method: GET
-Description: Find one tweet
-Return Values:
+<br>
+
+
+## <strong>DELETE</strong> {URL}/tweets/{:tweet_id}
+- Delete a tweet
+
+
+
+## <strong>POST</strong> {URL}/tweets
 
 Tweets Post 1
 URL: /tweets
