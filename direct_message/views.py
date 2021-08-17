@@ -47,11 +47,11 @@ class DmView(generics.ListCreateAPIView):
     queryset = Direct.objects.all()
 
     def post(self, request, *args, **kwargs):
-        sender_id = request.data.get("sender")
+        # print(request.user.pk)
+        sender_id = request.user.pk
         recipient_id = request.data.get("recipient")
         dm = request.data.get("dm")
         to_serialize = Direct.objects.create(sender_id=sender_id, recipient_id=recipient_id, dm=dm)
-        print(to_serialize.sender_id)
         serializer = DMSerializer(to_serialize, many=False)
         # serializer = DMSerializer(data={
         #     'sender_id': to_serialize.sender_id,
@@ -65,7 +65,8 @@ class DmViewID(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = DMSerializer
     queryset = Direct.objects.all()
-    def get (self, request, id, friend_id):
+    def get (self, request, friend_id):
+        id = request.user.pk
         to_serialize = Direct.objects.all().filter(models.Q(recipient=id, sender=friend_id) | models.Q(sender=id, recipient=friend_id))
         serializer = DMSerializer(to_serialize, many=True)
         # serializer.is_valid()

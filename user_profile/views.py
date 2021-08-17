@@ -17,8 +17,8 @@ class IndividualViewSet(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     queryset = UserProfile.objects.all()
     
-    def get(self, request, id):
-        # user_id = request.data.get("user_id")
+    def get(self, request):
+        id = request.user.pk
         id = UserProfile.objects.filter(user_id=id)
         serializer = ProfileSerializer(id, many = True)
         return Response(serializer.data)

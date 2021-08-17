@@ -34,8 +34,8 @@ router.register(r'profile', ProfileViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('messages/', DmView.as_view()),
-    path('messages/<id>/<friend_id>', DmViewID.as_view()),
-    path('profile/<id>/', IndividualViewSet.as_view(), name = 'individual-profile'),
+    path('messages/<friend_id>', DmViewID.as_view()),
+    path('profile/', IndividualViewSet.as_view(), name = 'individual-profile'),
     path('', include(router.urls)),
     path('api-auth/',include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/',TokenObtainPairView.as_view(), name='token_obtain_pair'),
