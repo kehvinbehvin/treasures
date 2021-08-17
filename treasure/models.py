@@ -10,4 +10,9 @@ class Treasure(models.Model):
     latitude = models.DecimalField(max_digits=30, decimal_places=15)
     date = models.DateTimeField(auto_now_add=True)
     hunters = models.ManyToManyField(User, related_name="hunter_id", blank=True)
-    
+    quiz = models.TextField(blank=True)
+    mcq1 = models.CharField(max_length=1000)
+    mcq2 = models.CharField(max_length=1000)
+    mcq3 = models.CharField(max_length=1000)
+    hint = models.TextField(blank=True)
+    answer = models.TextField(blank=True)
