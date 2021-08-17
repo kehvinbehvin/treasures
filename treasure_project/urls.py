@@ -23,7 +23,7 @@ from rest_framework import routers
 # Models
 from accounts.views import LoginView, RegisterUsersView, UserListView
 from direct_message.views import DmView, DmViewID
-from tweets.views import TweetsViewSet
+from tweets.views import TweetsViewSet, LikeTweetView
 from treasure.views import TreasuresView, TreasureView, TreasureUserView
 from user_profile.views import IndividualViewSet, ProfileViewSet
 
@@ -45,5 +45,6 @@ urlpatterns = [
     path('user/viewall/', UserListView.as_view(), name='user-all'),
     path('treasures/', TreasuresView.as_view(),name = 'all-treasures'),
     path('treasure/<name>', TreasureView.as_view(),name = 'detailed-treasures'),
-    path('treasures/participated/', TreasureUserView.as_view(),name='participated-treasures')
+    path('treasures/participated/', TreasureUserView.as_view(),name='participated-treasures'),
+    path('like/tweets/',LikeTweetView.as_view(),name='like-tweet')
 ]

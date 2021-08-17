@@ -243,7 +243,9 @@ Return Values:
 1. Changed the URL for direct messages --> For finding messages between user and friend
 2. Changed the return value for user_profiles, now, the friends id's are populated with the friend's username
 3. Added new API endpoint for treasures --> treasures/participated-> returns all the treasures that the user
-participated in
+   participated in.
+4. Added Likes to Tweets and also added new endpoint for liking tweets.
 
 ## Add in JWT
+
 1. How to refresh JWT Token
