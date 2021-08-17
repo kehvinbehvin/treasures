@@ -216,4 +216,3 @@ Return Values:
 | author | user_id       | true     | true   |
 | name   | treasure_name | true     | -      |
 | hunter | hunter_id     | true     | true   |
-

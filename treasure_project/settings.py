@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'direct_message.apps.DirectMessageConfig',
     'tweets.apps.TweetsConfig',
     'treasure.apps.TreasureConfig',
+    'user_profile.apps.UserProfileConfig',
+    
     # Third party
     'rest_framework',
     'corsheaders',

@@ -25,15 +25,17 @@ from accounts.views import LoginView, RegisterUsersView, UserListView
 from direct_message.views import DmView, DmViewID
 from tweets.views import TweetsViewSet
 from treasure.views import TreasuresView, TreasureView
-
+from user_profile.views import IndividualViewSet, ProfileViewSet
 
 router = routers.DefaultRouter()
 router.register(r'tweets', TweetsViewSet)
+router.register(r'profile', ProfileViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('messages/', DmView.as_view()),
     path('messages/<id>/<friend_id>', DmViewID.as_view()),
+    path('profile/<id>/', IndividualViewSet.as_view(), name = 'individual-profile'),
     path('', include(router.urls)),
     path('api-auth/',include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/',TokenObtainPairView.as_view(), name='token_obtain_pair'),
