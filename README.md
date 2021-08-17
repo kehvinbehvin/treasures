@@ -237,3 +237,13 @@ Return Values:
 | age      | Integer          | -        | -      |
 | about_me | String           | -        | -      |     |
 | friends  | Array[friend_id] | -        | -      |
+
+## New Stuff to add
+
+1. Changed the URL for direct messages --> For finding messages between user and friend
+2. Changed the return value for user_profiles, now, the friends id's are populated with the friend's username
+3. Added new API endpoint for treasures --> treasures/participated-> returns all the treasures that the user
+participated in
+
+## Add in JWT
+1. How to refresh JWT Token
