@@ -5,4 +5,4 @@ class TreasuresSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Treasure
-        fields = ('author', 'name','description', 'lng','lat','date','hunters')
+        fields = ('author', 'name','description', 'lng','lat','date','hunters','quiz','mcq1','mcq2','mcq3','hint','answer')
