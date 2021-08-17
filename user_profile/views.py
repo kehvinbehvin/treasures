@@ -23,3 +23,6 @@ class IndividualViewSet(generics.RetrieveUpdateAPIView):
         serializer = ProfileSerializer(id, many = True)
         return Response(serializer.data)
 
+    def put(self, request):
+        # Should be able to add friends, change nickname, change address, change age and change about me
+        pass

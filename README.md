@@ -244,7 +244,7 @@ Return Values:
 2. Changed the return value for user_profiles, now, the friends id's are populated with the friend's username
 3. Added new API endpoint for treasures --> treasures/participated-> returns all the treasures that the user
    participated in.
-4. Added Likes to Tweets and also added new endpoint for liking tweets.
+4. Added Likes to Tweets and also added new endpoint for liking tweets. -> likes for tweets are now username and id
 
 ## Add in JWT
 
