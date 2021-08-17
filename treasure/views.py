@@ -33,6 +33,16 @@ class TreasureView(generics.RetrieveUpdateDestroyAPIView):
         serializer = TreasuresSerializer(existing_treasure, many=True)
         return Response(serializer.data)
 
+class TreasureUserView(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = TreasuresSerializer
+    queryset = Treasure.objects.all()
+
+    def get(self,request,*args,**kwargs):
+        id = request.user.pk
+        participating_treasures = Treasure.objects.filter(hunters__id__contains=id)
+        serializer = TreasuresSerializer(participating_treasures, many= True)
+        return Response(serializer.data)
 # class DmViewID(generics.ListAPIView):s
 #     permission_classes = (permissions.IsAuthenticated,)
 #     serializer_class = DMSerializer
