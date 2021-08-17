@@ -216,3 +216,24 @@ Return Values:
 | author | user_id       | true     | true   |
 | name   | treasure_name | true     | -      |
 | hunter | hunter_id     | true     | true   |
+
+<br>
+
+# 📖 Profile
+
+## <strong>GET</strong> {URL}/profile/
+
+- Get all the profiles
+
+## <strong>POST/PUT</strong> {URL}/profile/{user_id}
+
+- Create/Edit user profile
+
+| field    | data_type        | required | unique |     |
+| -------- | ---------------- | -------- | ------ | --- |
+| user_id  | user_id          | -        | -      |
+| nickname | String           | -        | -      |     |
+| address  | String           | -        | -      |
+| age      | Integer          | -        | -      |
+| about_me | String           | -        | -      |     |
+| friends  | Array[friend_id] | -        | -      |
