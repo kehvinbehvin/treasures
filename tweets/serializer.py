@@ -14,3 +14,4 @@ class TweetsSerializer(serializers.ModelSerializer):
         model = Tweets
         # the fields that should be included in the serialized output
         fields = ['id','author', 'message', 'date']
+        depth = 1
