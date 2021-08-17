@@ -14,4 +14,4 @@ class TweetsViewSet(viewsets.ModelViewSet):
     # The serializer class for serializing output
     serializer_class = TweetsSerializer
     # optional permission class set permission level
-    permission_classes = [permissions.AllowAny] #Coule be [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated] #Coule be [permissions.IsAuthenticated]

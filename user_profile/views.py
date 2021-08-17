@@ -10,10 +10,10 @@ from .serializer import ProfileSerializer
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 class IndividualViewSet(generics.RetrieveUpdateAPIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ProfileSerializer
     queryset = UserProfile.objects.all()
     

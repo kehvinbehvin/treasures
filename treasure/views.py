@@ -9,12 +9,12 @@ from .models import Treasure
 from django.db import models
 
 class TreasuresView(generics.ListCreateAPIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TreasuresSerializer
     queryset = Treasure.objects.all()
 
 class TreasureView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TreasuresSerializer
     queryset = Treasure.objects.all()
     
