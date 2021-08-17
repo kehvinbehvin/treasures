@@ -1,28 +1,41 @@
 API ENDPOINTS
 
-USER LOGIN/REGISTRATION
+# 👦🏻 User
 
-User Login
-URL: /user/login
-Method: POST
-Body: {
-username: : String  
-password: : String
-}
-Description: Login User
+## <strong>POST</strong> {URL}/user/login
+
+<br>
+
+## <strong>User Login</strong>
+
+| field    | data_type | required | unique |     |
+| -------- | --------- | -------- | ------ | --- |
+| username | String    | true     | true   |     |
+| password | String    | true     | -      |
+
+- Login User
+
 Return Values:
 
 1. If successful, will return 2 tokens, keys: access,refresh
 2. If unsuccessful, will return error status = 401 unauthorised
 
-User SignUp
-URL: /user/signup
-Method: POST
-Body: {
-username: : String
-password: : String
-}
-Description: Sign Up User
+## <strong>POST</strong> {URL}/user/signup
+
+<br>
+
+## <strong>User Creation</strong>
+
+| field    | data_type | required | unique |     |
+| -------- | --------- | -------- | ------ | --- |
+| username | String    | true     | true   |
+| password | String    | true     | -      |
+| email    | String    | true     | true   |
+
+<br>
+
+- Add new user
+
 Return Values:
 
 1. If successful (Status = 201 Created)
@@ -30,105 +43,177 @@ Return Values:
    1. Because of duplicate username/email --> (Status = 500 Internal Server Error), Exception Value = Duplicate Key Value
    2. Because of empty fields --> (error message: "username, password and email is required to register a user")
 
-TOKEN REFRESH
-URL: /tweets
-Method: POST
-Header: {
-Authorization: Bearer <jwt access token>
+# 🍿 Tweets
+
+## <strong>GET</strong> {URL}/tweets/
+
+- View all tweets by all users
+
+<br>
+
+<details>
+
+<summary>Example</summary>
+
+```json
+[
+  {
+    "model": "direct_message.direct",
+    "pk": 1,
+    "fields": {
+      "sender": 1,
+      "recipient": 2,
+      "dm": "hello"
+    }
+  },
+  {
+    "model": "direct_message.direct",
+    "pk": 2,
+    "fields": {
+      "sender": 1,
+      "recipient": 3,
+      "dm": "hello"
+    }
+  }
+]
+```
+
+</details>
+
+<br>
+
+## <strong>GET</strong> {URL}/tweets/{:tweetid}
+
+- Get one tweet by ID
+
+<br>
+
+<details>
+
+<summary>Example</summary>
+
+```json
+{
+  "id": 3,
+  "author": 1,
+  "message": "hello world",
+  "date": "2021-08-12T08:35:54.539501Z"
 }
-Body: {
-refresh: <jwt refresh token>
-}
-Description: View all tweets by all users
-Return Values: {
-"access": <jwt access token>
-}
+```
 
-TWEETS
+</details>
 
-Tweets View All
-URL: /tweets
-Method: GET
-Header: {
-Authorization: Bearer <jwt access token>
-}
-Description: View all tweets by all users
-Return Values:
+<br>
 
-Tweets Delete 1
-URL: /tweets/:tweetid
-Method: DELETE
-Description: Delete one tweet
-Return Values:
+## <strong>POST</strong> {URL}/tweets/
 
-Tweets Find 1
-URL: /tweets/:tweetid
-Method: GET
-Description: Find one tweet
-Return Values:
+- Post a new tweet
 
-Tweets Post 1
-URL: /tweets
-Method: POST
-Body: {
-message: String
-}
-Description: Post a tweet
-Return Values:
+| field   | data_type | required | unique |     |
+| ------- | --------- | -------- | ------ | --- |
+| author  | user_id   | true     | true   |
+| message | String    | true     | -      |
+| date    | String    | true     | true   |
 
-DIRECT MESSAGES
-DMs - Get conversation between you and your friend
-URL: /messages/:userid/:friendid
-Method: GET
-Description: Retrieve all messages between you and your friend
-Return Values:
+## <strong>DELETE</strong> {URL}/tweets/{:tweet_id}
 
-DMs - Send a message to your friend
-URL: /messages
-Method: POST
-Body: {
-sender: :id
-recipient: :id
-}
-Description: Send a message to your friend
-Return Values:
+- Delete a tweet
 
-TREASURES
-Treasure view all
-URL: /treasures
-Method: GET
-Description: View all the treasures existing in the app
-Return Values: Array of Objects, Fields: author,name, description, longitude, latitude, date, hunters(array)
+<br>
 
-Treasure Create new
-URL: /treasures
-Method: POST
-Body: {
-"author": user_id,
-"name": treasure_name,
-"description": treasure_description,
-"longitude": Integer,
-"latitude": Integer,
-"date": date,
-"hunters": "",
-}
-Description: User creates a new treasure for a hunt so there are no hunters to add yet, will explore images
-in the future
-Return Values: Treasure object
+# 🍉 Direct Messages
 
-Treasure view one
-URL: /treasure/<:treasure_name>
-Method: GET
-Description: Find a treasure by its name
-Return Values: Treasure Object
+## <strong>GET</strong> {URL}/messages/{:userid}/{:friendid}
 
-Treasure add hunter
-URL: /treasure/<:treasure_name>
-Method: PUT
-Body:{
-"author": author_id,
-"name": treasure_name,
-"hunter": hunter_id,
-}
-Description: Add the user as a hunter to a existing treasure
-Return Value: Treasure Object
+- Get conversation between you and your friend
+
+<details>
+
+<summary>Example</summary>
+
+```json
+[
+  {
+    "model": "direct_message.direct",
+    "pk": 1,
+    "fields": {
+      "sender": 1,
+      "recipient": 2,
+      "dm": "hello"
+    }
+  }
+]
+```
+
+</details>
+
+<br>
+
+## <strong>POST</strong> {URL}/messages/
+
+- Send a message to your friend
+
+| field     | data_type    | required | unique |     |
+| --------- | ------------ | -------- | ------ | --- |
+| sender    | sender_id    | true     | true   |
+| recipient | recipient_id | true     | true   |
+| dm        | String       | true     | true   |
+
+<br>
+
+# 🍺 Treasures
+
+## <strong>GET</strong> {URL}/treasures/
+
+- View all the treasures
+
+<details>
+
+<summary>Example</summary>
+
+```json
+[
+  {
+    "author": 1,
+    "name": "BIGGEST TREASURE OF ALL",
+    "description": "gold bars, rolex, bentley",
+    "longitude": "1.356070000000000",
+    "latitude": "103.954230000000000",
+    "date": "2021-08-16T13:51:52.318530Z",
+    "hunters": [2]
+  }
+]
+```
+
+</details>
+
+<br>
+
+## <strong>GET</strong> {URL}/treasures/{:treasure_name}
+
+- Get one treasure via name
+
+## <strong>POST</strong> {URL}/treasures/
+
+- Post a new treasure
+
+| field       | data_type | required | unique |     |
+| ----------- | --------- | -------- | ------ | --- |
+| author      | admin_id  | -        | -      |
+| name        | String    | -        | -      |     |
+| description | String    | true     | -      |
+| longitude   | Integer   | true     | -      |
+| latitude    | Integer   | true     | -      |     |
+| date        | String    | true     | -      |
+| hunters     | Array     | false    | -      |     |
+
+## <strong>PUT</strong> {URL}/treasures/{:treasure_name}
+
+- Add hunters to the treasure object
+
+| field  | data_type     | required | unique |     |
+| ------ | ------------- | -------- | ------ | --- |
+| author | user_id       | true     | true   |
+| name   | treasure_name | true     | -      |
+| hunter | hunter_id     | true     | true   |
+
