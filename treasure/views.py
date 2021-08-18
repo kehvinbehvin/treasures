@@ -18,10 +18,10 @@ class TreasureView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TreasuresSerializer
     queryset = Treasure.objects.all()
     
-    def put(self, request, *args, **kwargs):
+    def put(self, request, name, *args, **kwargs):
         # author_id = request.data.get("author")
         hunter_id = request.user.pk
-        treasure_name = request.data.get("treasure_name")
+        treasure_name = name
         existing_treasure = Treasure.objects.filter(name=treasure_name)
         # print(existing_treasure[0].hunters)
         existing_treasure[0].hunters.add(hunter_id)
