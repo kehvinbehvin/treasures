@@ -39,12 +39,22 @@ class IndividualView(generics.RetrieveUpdateAPIView):
 
     def put(self, request,friend_id ,*args,**kwargs):
         print(request)
+
         id = request.user.pk
         friend_id = friend_id
+
         user_profile_array = UserProfile.objects.filter(user_id=id)
+        friend_profile_array = UserProfile.objects.filter(user_id=friend_id)
+
+        user_array = User.objects.filter(id = id)
         friend_array = User.objects.filter(id=friend_id)
+
+        friend_profile_array[0].friends.add(user_array[0])
         user_profile_array[0].friends.add(friend_array[0])
+        friend_serializer = ProfileSerializer(friend_profile_array, many = True)
+
         serializer = ProfileSerializer(user_profile_array, many = True)
+
         return Response(serializer.data)
 
 
