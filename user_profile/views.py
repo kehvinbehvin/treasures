@@ -26,3 +26,4 @@ class IndividualViewSet(generics.RetrieveUpdateAPIView):
     def put(self, request):
         # Should be able to add friends, change nickname, change address, change age and change about me
         pass
+
