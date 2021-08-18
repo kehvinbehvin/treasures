@@ -44,9 +44,7 @@ from django.db import models
 class DmView(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = DMSerializer
-    queryset = Direct.objects.all()
-
-    
+    queryset = Direct.objects.all()    
 
 class DmViewID(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
