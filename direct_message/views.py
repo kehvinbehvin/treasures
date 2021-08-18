@@ -58,10 +58,10 @@ class DmViewID(generics.ListCreateAPIView):
         serializer = DMSerializer(to_serialize, many=True)
         # serializer.is_valid()
         return Response(serializer.data)
-    def post(self, request, *args, **kwargs):
+    def post(self, request,friend_id, *args, **kwargs):
         # print(request.user.pk)
         sender_id = request.user.pk
-        recipient_id = request.data.get("recipient")
+        recipient_id = friend_id
         dm = request.data.get("dm")
         to_serialize = Direct.objects.create(sender_id=sender_id, recipient_id=recipient_id, dm=dm)
         serializer = DMSerializer(to_serialize, many=False)
