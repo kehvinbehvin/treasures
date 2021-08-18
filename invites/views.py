@@ -16,8 +16,12 @@ class InvitesViewSet(viewsets.ModelViewSet):
     def create(self, request,*args,**kwargs):
         inviter = request.user.pk
         user_object = User.objects.filter(id=inviter)
+
         invitee = request.data.get("invitee")
-        to_serialize = Invites.objects.create(inviter=user_object[0], invitee=invitee, status="PENDING")
+        invitee_object = User.objects.filter(id=invitee)
+
+        to_serialize = Invites.objects.create(inviter=user_object[0], invitee=invitee_object[0], status="PENDING")
+        
         # to_serialize.likes.add(author_id)
         serializer = InvitesSerializer(to_serialize, many=False)
         return Response(serializer.data)
