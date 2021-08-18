@@ -23,7 +23,7 @@ class TweetsViewSet(viewsets.ModelViewSet):
         message = request.data.get("message")
         date = request.data.get("date")
         to_serialize = Tweets.objects.create(author=user_object[0],message=message,date=date)
-        to_serialize.likes.add(author_id)
+        # to_serialize.likes.add(author_id)
         serializer = TweetsSerializer(to_serialize, many=False)
         return Response(serializer.data)
         
