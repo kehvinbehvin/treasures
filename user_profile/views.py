@@ -12,18 +12,18 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class IndividualViewSet(generics.RetrieveUpdateAPIView):
+class IndividualView(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ProfileSerializer
     queryset = UserProfile.objects.all()
     
     def get(self, request):
         id = request.user.pk
-        id = UserProfile.objects.filter(user_id=id)
-        serializer = ProfileSerializer(id, many = True)
+        user_profile = UserProfile.objects.filter(user_id=id)
+        serializer = ProfileSerializer(user_profile, many = True)
         return Response(serializer.data)
 
     def put(self, request):
-        # Should be able to add friends, change nickname, change address, change age and change about me
+        # Should be able to add friends
         pass
 

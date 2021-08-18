@@ -43,6 +43,7 @@ class TreasureUserView(generics.ListAPIView):
         participating_treasures = Treasure.objects.filter(hunters__id__contains=id)
         serializer = TreasuresSerializer(participating_treasures, many= True)
         return Response(serializer.data)
+        
 # class DmViewID(generics.ListAPIView):s
 #     permission_classes = (permissions.IsAuthenticated,)
 #     serializer_class = DMSerializer
