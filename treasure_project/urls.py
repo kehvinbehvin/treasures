@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from invites.views import InvitesViewSet
+from invites.serializer import InvitesSerializer
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -30,7 +32,7 @@ from user_profile.views import IndividualView, ProfileViewSet
 router = routers.DefaultRouter()
 router.register(r'tweets', TweetsViewSet)
 router.register(r'profile', ProfileViewSet)
-
+router.register(r'invites', InvitesViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('messages/', DmView.as_view()),
