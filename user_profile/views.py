@@ -20,9 +20,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
         address = request.data.get("address")
         age = request.data.get("age")
         about_me = request.data.get("about_me")
-
         to_serialize = UserProfile.objects.create(user_id=user_object[0], nickname=nickname, address=address, age=age, about_me=about_me)
-    
+
         # to_serialize.likes.add(author_id)
         serializer = ProfileSerializer(to_serialize, many=False)
         return Response(serializer.data)
@@ -37,5 +36,16 @@ class IndividualView(generics.RetrieveUpdateAPIView):
         user_profile = UserProfile.objects.filter(user_id=id)
         serializer = ProfileSerializer(user_profile, many = True)
         return Response(serializer.data)
+
+    def put(self, request,friend_id ,*args,**kwargs):
+        print(request)
+        id = request.user.pk
+        friend_id = friend_id
+        user_profile_array = UserProfile.objects.filter(user_id=id)
+        friend_array = User.objects.filter(id=friend_id)
+        user_profile_array[0].friends.add(friend_array[0])
+        serializer = ProfileSerializer(user_profile_array, many = True)
+        return Response(serializer.data)
+
 
 

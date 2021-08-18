@@ -38,6 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('messages/', DmView.as_view()),
     path('messages/<friend_id>', DmViewID.as_view()),
+    path('user-profile/<friend_id>/', IndividualView.as_view(), name = 'individual-profile-put'),
     path('user-profile/', IndividualView.as_view(), name = 'individual-profile'),
     path('', include(router.urls)),
     path('api-auth/',include('rest_framework.urls', namespace='rest_framework')),
