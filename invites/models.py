@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 
 # choices
 CHOICES = (("NULL","NULL"),("PENDING","PENDING"), ("ACCEPT","ACCEPT"), ("DECLINE","DECLINE"))
-
-
 class Invites(models.Model):
     inviter = models.ForeignKey(User, on_delete= models.DO_NOTHING, related_name='inviter_id')
     invitee = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name= 'invitee_id')

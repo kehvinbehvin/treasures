@@ -10,12 +10,13 @@ from .serializer import InvitesSerializer
 from django.contrib.auth.models import User
 
 # Create your views here.
-class InvitesViewSet(viewsets.ModelViewSet):
+class InviterViewSet(viewsets.ModelViewSet):
     queryset = Invites.objects.all()
     serializer_class = InvitesSerializer
     permission_classes = [permissions.AllowAny]
 
     def create(self, request,*args,**kwargs):
+        # For inviter to create invite
         # print("hello")
         inviter = request.user.pk
         user_object = User.objects.filter(id=inviter)
@@ -30,10 +31,40 @@ class InvitesViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def list(self, request,*args,**kwargs):
+        # For Inviter to see all the invites he sent
+        current_user = request.user.pk
+        # print(current_user)
+        # user_object = User.objects.filter(id=current_user)
+        to_serialize = Invites.objects.filter(inviter__id__contains=current_user)
+        # print(to_serialize)
+        serializer = InvitesSerializer(to_serialize, many=True)
+        return Response(serializer.data)
+
+class InviteeViewSet(viewsets.ModelViewSet):
+    queryset = Invites.objects.all()
+    serializer_class = InvitesSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+    def list(self, request,*args,**kwargs):
+        # For Invitees to see all the invites he got
         current_user = request.user.pk
         # print(current_user)
         # user_object = User.objects.filter(id=current_user)
         to_serialize = Invites.objects.filter(invitee__id__contains=current_user)
         # print(to_serialize)
         serializer = InvitesSerializer(to_serialize, many=True)
+        return Response(serializer.data)
+
+    def update(self, request, pk):
+        # For Inviees to change the status of the invite
+        # current_user = request.user.pk
+        status = request.data.get("status")
+        invite_id = pk
+        to_serialize = Invites.objects.filter(id=invite_id)
+        invite_object = to_serialize[0]
+        invite_object.status = status
+        invite_object.save()
+        serializer = InvitesSerializer(data = to_serialize, many=True)
+        serializer.is_valid()
         return Response(serializer.data)

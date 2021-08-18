@@ -38,7 +38,4 @@ class IndividualView(generics.RetrieveUpdateAPIView):
         serializer = ProfileSerializer(user_profile, many = True)
         return Response(serializer.data)
 
-    def put(self, request):
-        # Should be able to add friends
-        pass
 
