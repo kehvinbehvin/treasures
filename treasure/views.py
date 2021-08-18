@@ -19,8 +19,8 @@ class TreasureView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Treasure.objects.all()
     
     def put(self, request, *args, **kwargs):
-        author_id = request.data.get("author")
-        hunter_id = request.data.get("hunter")
+        # author_id = request.data.get("author")
+        hunter_id = request.user.pk
         treasure_name = request.data.get("name")
         existing_treasure = Treasure.objects.filter(name=treasure_name)
         # print(existing_treasure[0].hunters)
