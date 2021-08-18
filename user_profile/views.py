@@ -12,6 +12,21 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [permissions.AllowAny]
 
+    def create(self, request,*args,**kwargs):
+        # print("hello")
+        user_id = request.user.pk
+        user_object = User.objects.filter(id=user_id)
+        nickname = request.data.get("nickname")
+        address = request.data.get("address")
+        age = request.data.get("age")
+        about_me = request.data.get("about_me")
+
+        to_serialize = UserProfile.objects.create(user_id=user_object[0], nickname=nickname, address=address, age=age, about_me=about_me)
+    
+        # to_serialize.likes.add(author_id)
+        serializer = ProfileSerializer(to_serialize, many=False)
+        return Response(serializer.data)
+
 class IndividualView(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ProfileSerializer

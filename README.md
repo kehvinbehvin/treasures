@@ -284,6 +284,8 @@ Return Values:
    participated in.
 4. Added Likes to Tweets and also added new endpoint for liking tweets. -> likes for tweets are now username and id
 5. Override the Tweets' Modelviewset create method such that it only receives a post to tweets/ with body{"message","date"}
+6. Change the code to add new profile (/profile/) body: nickname, address, age, aabout_me
+7. Change the url for finding your own user profile to /user-profile/
 
 ## Add in JWT
 
