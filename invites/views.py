@@ -1,6 +1,8 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
 from .models import Invites
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -25,3 +27,11 @@ class InvitesViewSet(viewsets.ModelViewSet):
         # to_serialize.likes.add(author_id)
         serializer = InvitesSerializer(to_serialize, many=False)
         return Response(serializer.data)
+
+    def list(self, request, id):
+        current_user = id
+        user_object = User.objects.filter(id=current_user)
+
+        to_serialize = Invites.objects.filter(inviter=user_object[0])
+        serializer = InvitesSerializer(to_serialize)
+        return HttpResponse("hello")
