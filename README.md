@@ -2,11 +2,11 @@ API ENDPOINTS
 
 # 👦🏻 User
 
-## <strong>POST</strong> {URL}/user/login
+## <strong>User Login</strong>
 
 <br>
 
-## <strong>User Login</strong>
+## <strong>POST</strong> {URL}/user/login/
 
 | field    | data_type | required | unique |     |
 | -------- | --------- | -------- | ------ | --- |
@@ -20,7 +20,7 @@ Return Values:
 1. If successful, will return 2 tokens, keys: access,refresh
 2. If unsuccessful, will return error status = 401 unauthorised
 
-## <strong>POST</strong> {URL}/user/signup
+## <strong>POST</strong> {URL}/user/signup/
 
 <br>
 
@@ -42,6 +42,31 @@ Return Values:
 2. If unsuccesful
    1. Because of duplicate username/email --> (Status = 500 Internal Server Error), Exception Value = Duplicate Key Value
    2. Because of empty fields --> (error message: "username, password and email is required to register a user")
+
+# 👦🏻 JWT
+
+## <strong>POST</strong> {URL}/api/token/refresh/
+
+<br>
+
+## <strong>Refresh JWT Token</strong>
+
+| field   | data_type | required | unique |     |
+| ------- | --------- | -------- | ------ | --- |
+| refresh | String    | true     | true   |     |
+
+<details>
+
+<summary>Example</summary>
+
+```json
+  {
+    "refresh": "refresh token value",
+  },
+
+```
+
+</details>
 
 # 🍿 Tweets
 
@@ -82,7 +107,7 @@ Return Values:
 
 <br>
 
-## <strong>GET</strong> {URL}/tweets/{:tweetid}
+## <strong>GET</strong> {URL}/tweets/{:tweetid}/
 
 - Get one tweet by ID
 
@@ -115,7 +140,20 @@ Return Values:
 | message | String    | true     | -      |
 | date    | String    | true     | true   |
 
-## <strong>DELETE</strong> {URL}/tweets/{:tweet_id}
+<details>
+
+<summary>Post Example</summary>
+
+```json
+{
+  "message": "hello world",
+  "date": "2021-08-12T08:35:54.539501Z"
+}
+```
+
+</details>
+
+## <strong>DELETE</strong> {URL}/tweets/{:tweet_id}/
 
 - Delete a tweet
 
@@ -123,7 +161,7 @@ Return Values:
 
 # 🍉 Direct Messages
 
-## <strong>GET</strong> {URL}/messages/{:userid}/{:friendid}
+## <strong>GET</strong> {URL}/messages/{:userid}/{:friendid}/
 
 - Get conversation between you and your friend
 
@@ -189,7 +227,7 @@ Return Values:
 
 <br>
 
-## <strong>GET</strong> {URL}/treasures/{:treasure_name}
+## <strong>GET</strong> {URL}/treasures/{:treasure_name}/
 
 - Get one treasure via name
 
@@ -207,7 +245,7 @@ Return Values:
 | date        | String    | true     | -      |
 | hunters     | Array     | false    | -      |     |
 
-## <strong>PUT</strong> {URL}/treasures/{:treasure_name}
+## <strong>PUT</strong> {URL}/treasures/{:treasure_name}/
 
 - Add hunters to the treasure object
 
@@ -225,7 +263,7 @@ Return Values:
 
 - Get all the profiles
 
-## <strong>POST/PUT</strong> {URL}/profile/{user_id}
+## <strong>POST/PUT</strong> {URL}/profile/{user_id}/
 
 - Create/Edit user profile
 
@@ -245,6 +283,7 @@ Return Values:
 3. Added new API endpoint for treasures --> treasures/participated-> returns all the treasures that the user
    participated in.
 4. Added Likes to Tweets and also added new endpoint for liking tweets. -> likes for tweets are now username and id
+5. Override the Tweets' Modelviewset create method such that it only receives a post to tweets/ with body{"message","date"}
 
 ## Add in JWT
 

@@ -29,6 +29,7 @@ class TreasureView(generics.RetrieveUpdateDestroyAPIView):
         return Response(serializer.data)
 
     def get(self,request,name,*args,**kwargs):
+        print(name)
         existing_treasure = Treasure.objects.filter(name=name)
         serializer = TreasuresSerializer(existing_treasure, many=True)
         return Response(serializer.data)
