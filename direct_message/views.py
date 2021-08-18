@@ -41,11 +41,23 @@ from django.contrib.auth import authenticate, login
 from .models import Direct
 from django.db import models
 
-class DmView(generics.ListCreateAPIView):
+class DmView(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = DMSerializer
     queryset = Direct.objects.all()
 
+    
+
+class DmViewID(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = DMSerializer
+    queryset = Direct.objects.all()
+    def get (self, request, friend_id):
+        id = request.user.pk
+        to_serialize = Direct.objects.all().filter(models.Q(recipient=id, sender=friend_id) | models.Q(sender=id, recipient=friend_id))
+        serializer = DMSerializer(to_serialize, many=True)
+        # serializer.is_valid()
+        return Response(serializer.data)
     def post(self, request, *args, **kwargs):
         # print(request.user.pk)
         sender_id = request.user.pk
@@ -58,16 +70,5 @@ class DmView(generics.ListCreateAPIView):
         #     'recipient_id': to_serialize.recipient_id,
         #     'dm': to_serialize.dm
         # })
-        # serializer.is_valid()
-        return Response(serializer.data)
-
-class DmViewID(generics.ListAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = DMSerializer
-    queryset = Direct.objects.all()
-    def get (self, request, friend_id):
-        id = request.user.pk
-        to_serialize = Direct.objects.all().filter(models.Q(recipient=id, sender=friend_id) | models.Q(sender=id, recipient=friend_id))
-        serializer = DMSerializer(to_serialize, many=True)
         # serializer.is_valid()
         return Response(serializer.data)
