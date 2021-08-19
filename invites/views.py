@@ -24,18 +24,15 @@ class InviterViewSet(viewsets.ModelViewSet):
         invitee = request.data.get("invitee")
         invitee_object = User.objects.filter(id=invitee)
 
-        invite_object_query = Invites.objects.filter(inviter=inviter, invitee=invitee)
+        invite_object_query = Invites.objects.filter(inviter=inviter, invitee=invitee,status="PENDING")
         user_profile_query = UserProfile.objects.filter(user_id = inviter)
-    
-        if invite_object_query.exists():
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
         user_object_query = UserProfile.objects.filter(friends__id__contains=invitee).filter(user_id=inviter)
         
         if user_object_query.exists():
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-        
-        
+        elif invite_object_query.exists():
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
         to_serialize = Invites.objects.create(inviter=user_object[0], invitee=invitee_object[0], status="PENDING")
     
         # to_serialize.likes.add(author_id)
