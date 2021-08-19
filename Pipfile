@@ -13,6 +13,7 @@ gunicorn = "*"
 django-heroku = "*"
 djangorestframework-simplejwt = "*"
 pytest-django = "*"
+pytest-cov = "*"
 
 [dev-packages]
 
