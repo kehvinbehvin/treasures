@@ -21,6 +21,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
         age = request.data.get("age")
         about_me = request.data.get("about_me")
         image_src = request.data.get("image_src")
+        image_src_default = "https://c.files.bbci.co.uk/16620/production/_91408619_55df76d5-2245-41c1-8031-07a4da3f313f.jpg"
         to_serialize = UserProfile.objects.create(user_id=user_object[0], nickname=nickname, address=address, age=age, about_me=about_me, image_src=image_src)
         # to_serialize.likes.add(author_id)
         serializer = ProfileSerializer(to_serialize, many=False)
