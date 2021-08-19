@@ -16,3 +16,4 @@ class Treasure(models.Model):
     mcq3 = models.CharField(max_length=1000)
     hint = models.TextField(blank=True)
     answer = models.TextField(blank=True)
+    money = models.CharField(max_length=1000, default="$")
