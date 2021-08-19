@@ -2,9 +2,7 @@ API ENDPOINTS
 
 # 👦🏻 User
 
-## <strong>User Login</strong>
 
-<br>
 
 ## <strong>POST</strong> {URL}/user/login/
 
