@@ -16,14 +16,17 @@ class InviterViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
     def create(self, request,*args,**kwargs):
-        # For inviter to create invite
-        # print("hello")
+
         inviter = request.user.pk
         user_object = User.objects.filter(id=inviter)
 
         invitee = request.data.get("invitee")
         invitee_object = User.objects.filter(id=invitee)
 
+        invite_object_query = Invite.objects.filter(inviter=inviter, invitee=invitee)
+        if invite_object_qeury.exists() == False:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
         to_serialize = Invites.objects.create(inviter=user_object[0], invitee=invitee_object[0], status="PENDING")
     
         # to_serialize.likes.add(author_id)
