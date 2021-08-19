@@ -7,8 +7,8 @@ class UserProfile(models.Model):
     friends = models.ManyToManyField(User, related_name="friend_id", blank=True)
     nickname = models.CharField(max_length= 20, blank= True)
     address = models.CharField(max_length= 20, blank= True)
-    age = models.IntegerField()
-    about_me = models.CharField(max_length=1000)
-    image_src = models.CharField(max_length=1000)
+    age = models.IntegerField(blank=True)
+    about_me = models.CharField(max_length=1000,blank=True)
+    image_src = models.CharField(max_length=1000,blank=True)
     
     
