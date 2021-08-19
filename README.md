@@ -162,7 +162,7 @@ Return Values:
 
 # 🍉 Direct Messages
 
-## <strong>GET</strong> {URL}/user-profile/{:friend_id}/
+## <strong>GET</strong> {URL}/messages/{:friend_id}/
 
 - Get conversation between you and your friend
 
@@ -272,9 +272,9 @@ Return Values:
 
 - Get the current user's profile
 
-## <strong>POST/PUT</strong> {URL}/profile/
+## <strong>POST</strong> {URL}/profile/
 
-- Create/Edit user profile
+- Create user profile
 
 | field    | data_type        | required | unique |     |
 | -------- | ---------------- | -------- | ------ | --- |
@@ -316,7 +316,3 @@ Return Values:
 <!-- 4. Override the Tweets' Modelviewset create method such that it only receives a post to tweets/ with body{"message","date"} -->
 <!-- 5. Change the code to add new profile (/profile/) body: nickname, address, age, about_me -->
 <!-- 6. Change the url for finding your own user profile to /user-profile/ -->
-
-## Add in JWT
-
-1. How to refresh JWT Token
