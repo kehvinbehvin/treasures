@@ -2,8 +2,6 @@ API ENDPOINTS
 
 # 👦🏻 User
 
-
-
 ## <strong>POST</strong> {URL}/user/login/
 
 | field    | data_type | required | unique |     |
@@ -304,8 +302,6 @@ Return Values:
 ## <strong>POST</strong> {URL}/inviters/
 
 - Send a friend request
-
-## New Stuff to add
 
 <!-- 1. Changed the URL for direct messages For finding messages between user and friend -->
 <!-- 2. Changed the return value for user_profiles, now, the friends id's are populated with the friend's username -->
