@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from .models import Invites
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework import permissions
 from .serializer import InvitesSerializer
 from django.contrib.auth.models import User
@@ -23,8 +23,9 @@ class InviterViewSet(viewsets.ModelViewSet):
         invitee = request.data.get("invitee")
         invitee_object = User.objects.filter(id=invitee)
 
-        invite_object_query = Invite.objects.filter(inviter=inviter, invitee=invitee)
-        if invite_object_qeury.exists() == False:
+        invite_object_query = Invites.objects.filter(inviter=inviter, invitee=invitee)
+        
+        if invite_object_query.exists() == False:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
         to_serialize = Invites.objects.create(inviter=user_object[0], invitee=invitee_object[0], status="PENDING")
