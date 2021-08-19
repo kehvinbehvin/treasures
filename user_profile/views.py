@@ -20,8 +20,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
         address = request.data.get("address")
         age = request.data.get("age")
         about_me = request.data.get("about_me")
-        to_serialize = UserProfile.objects.create(user_id=user_object[0], nickname=nickname, address=address, age=age, about_me=about_me)
-
+        image_src = request.data.get("image_src")
+        to_serialize = UserProfile.objects.create(user_id=user_object[0], nickname=nickname, address=address, age=age, about_me=about_me, image_src=image_src)
         # to_serialize.likes.add(author_id)
         serializer = ProfileSerializer(to_serialize, many=False)
         return Response(serializer.data)

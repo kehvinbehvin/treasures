@@ -9,4 +9,5 @@ class UserProfile(models.Model):
     address = models.CharField(max_length= 20, blank= True)
     age = models.IntegerField()
     about_me = models.CharField(max_length=1000)
+    image_src = models.CharField(max_length=1000)
     
