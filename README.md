@@ -285,6 +285,28 @@ Return Values:
 | about_me | String           | -        | -      |     |
 | friends  | Array[friend_id] | -        | -      |
 
+# ✏️ Friend Request
+
+## <strong>GET</strong> {URL}/invitees/
+
+- Display all current user's friend requests
+
+## <strong>PUT</strong> {URL}/invitees/{:invite_id}/
+
+- Update friend requests to either "ACCEPT" or "DECLINE"
+
+## <strong>POST</strong> {URL}/user-profile/{:friend_id}
+
+- Add friend to friend list
+
+## <strong>GET</strong> {URL}/inviters/
+
+- User can request to see all friend invites that they have sent
+
+## <strong>POST</strong> {URL}/inviters/
+
+- Send a friend request
+
 ## New Stuff to add
 
 <!-- 1. Changed the URL for direct messages For finding messages between user and friend -->
