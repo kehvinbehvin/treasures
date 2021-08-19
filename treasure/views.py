@@ -23,7 +23,10 @@ class TreasureView(generics.RetrieveUpdateDestroyAPIView):
         hunter_id = request.user.pk
         treasure_name = name
         existing_treasure = Treasure.objects.filter(name=treasure_name)
-        # print(existing_treasure[0].hunters)
+        
+        if existing_treasure.exists() == False:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+            
         existing_treasure[0].hunters.add(hunter_id)
         serializer = TreasuresSerializer(existing_treasure, many=True)
         return Response(serializer.data)
