@@ -139,6 +139,7 @@ Return Values:
 | author  | user_id   | true     | true   |
 | message | String    | true     | -      |
 | date    | String    | true     | true   |
+| likes   | user_id   | false    | true   |
 
 <details>
 
@@ -161,7 +162,7 @@ Return Values:
 
 # 🍉 Direct Messages
 
-## <strong>GET</strong> {URL}/messages/{:userid}/{:friendid}/
+## <strong>GET</strong> {URL}/user-profile/{:friend_id}/
 
 - Get conversation between you and your friend
 
@@ -255,6 +256,10 @@ Return Values:
 | name   | treasure_name | true     | -      |
 | hunter | hunter_id     | true     | true   |
 
+## <strong>GET</strong> {URL}/treasures/participated/
+
+- Get all the treasures participated by the current user
+
 <br>
 
 # 📖 Profile
@@ -263,7 +268,11 @@ Return Values:
 
 - Get all the profiles
 
-## <strong>POST/PUT</strong> {URL}/profile/{user_id}/
+## <strong>GET</strong> {URL}/user-profile/
+
+- Get the current user's profile
+
+## <strong>POST/PUT</strong> {URL}/profile/
 
 - Create/Edit user profile
 
@@ -278,14 +287,13 @@ Return Values:
 
 ## New Stuff to add
 
-1. Changed the URL for direct messages --> For finding messages between user and friend
-2. Changed the return value for user_profiles, now, the friends id's are populated with the friend's username
-3. Added new API endpoint for treasures --> treasures/participated-> returns all the treasures that the user
-   participated in.
-4. Added Likes to Tweets and also added new endpoint for liking tweets. -> likes for tweets are now username and id
-5. Override the Tweets' Modelviewset create method such that it only receives a post to tweets/ with body{"message","date"}
-6. Change the code to add new profile (/profile/) body: nickname, address, age, aabout_me
-7. Change the url for finding your own user profile to /user-profile/
+<!-- 1. Changed the URL for direct messages For finding messages between user and friend -->
+<!-- 2. Changed the return value for user_profiles, now, the friends id's are populated with the friend's username -->
+<!-- 3. Added new API endpoint for treasures treasures/participated-> returns all the treasures that the user participated in -->
+<!-- 3. Added Likes to Tweets and also added new endpoint for liking tweets. -> likes for tweets are now username and id -->
+<!-- 4. Override the Tweets' Modelviewset create method such that it only receives a post to tweets/ with body{"message","date"} -->
+<!-- 5. Change the code to add new profile (/profile/) body: nickname, address, age, about_me -->
+<!-- 6. Change the url for finding your own user profile to /user-profile/ -->
 
 ## Add in JWT
 

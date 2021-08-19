@@ -10,3 +10,4 @@ class UserProfile(models.Model):
     age = models.IntegerField()
     about_me = models.CharField(max_length=1000)
     
+    
