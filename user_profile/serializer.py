@@ -13,5 +13,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         # The model it will serialize
         model = UserProfile
         # the fields that should be included in the serialized output
-        fields = ['id','user_id', 'nickname', 'address', 'age', 'about_me', 'friends']
+        fields = ['id','user_id', 'nickname', 'address', 'age', 'about_me', 'friends','image_src']
         depth = 1

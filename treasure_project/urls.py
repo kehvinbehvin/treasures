@@ -34,13 +34,14 @@ router.register(r'tweets', TweetsViewSet)
 router.register(r'profile', ProfileViewSet)
 router.register(r'inviters', InviterViewSet)
 router.register(r'invitees', InviteeViewSet)
+
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('messages/', DmView.as_view()),
     path('messages/<friend_id>', DmViewID.as_view()),
-    path('user-profile/<friend_id>/', IndividualView.as_view(), name = 'individual-profile-put'),
     path('user-profile/', IndividualView.as_view(), name = 'individual-profile'),
-    path('', include(router.urls)),
+    path('user-profile/<friend_id>/', IndividualView.as_view(), name = 'individual-profile-put'),
     path('api-auth/',include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/',TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -50,5 +51,5 @@ urlpatterns = [
     path('treasures/', TreasuresView.as_view(),name = 'all-treasures'),
     path('treasure/<name>', TreasureView.as_view(),name = 'detailed-treasures'),
     path('treasures/participated/', TreasureUserView.as_view(),name='participated-treasures'),
-    path('like/tweets/',LikeTweetView.as_view(),name='like-tweet')
+    path('like/tweets/',LikeTweetView.as_view(),name='like-tweet'),
 ]
